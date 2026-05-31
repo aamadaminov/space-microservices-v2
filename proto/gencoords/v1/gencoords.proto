@@ -1,0 +1,20 @@
+syntax = "proto3";
+package github.com.space_microservices_v2.gencoords.v1;
+option go_package = "github.com/aamadaminov/space-microservices-v2/gencoords/pkg/gen/gencoords/v1;gencoordsv1";
+
+service SensorService {
+    rpc GetSensor(SensorRequest) returns (SensorResponse);
+}
+
+message SensorRequest {
+}
+
+message SensorResponse {
+ string time = 1;
+ double x1 = 2;
+ double y1 = 3;
+ double z1 = 4;
+ double vx1 = 5;
+ double vy1 = 6;
+ double vz1 = 7; 
+}

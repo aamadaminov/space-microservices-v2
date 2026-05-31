@@ -1,0 +1,19 @@
+networks:
+  monitoring:
+    driver: host
+
+services:
+  consumernotes:
+    image: consumernotes:v1
+    container_name: consumernotes
+    environment:
+#      ADDRESS_METRICS: 0.0.0.0:2223
+      ADDRESS_RABBITMQ: 172.17.0.1:5672
+#      OTEL_EXPORTER_OTLP_ENDPOINT: otel01:4317
+      API_ADDRESS: 0.0.0.0:9071
+      ADDRESS_POSTGRESQL: 172.17.0.1:5432
+      ADDRESS_REDIS: 172.17.0.1:6379
+    ports:
+#      - 2223:2223
+      - 9071:9071
+    restart: unless-stopped

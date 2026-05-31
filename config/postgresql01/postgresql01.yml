@@ -1,0 +1,23 @@
+version: "3.9"
+
+networks:
+  monitoring:
+    driver: host
+
+services:
+  postgresql01:
+    image: postgres:15
+    container_name: postgresql01
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: app
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - 6379:6379
+    restart: unless-stopped

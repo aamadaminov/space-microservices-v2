@@ -1,0 +1,15 @@
+syntax = "proto3";
+option go_package = "./proto";
+package flightbookproto;
+service FlightbookService {
+    rpc GetFlightbook(FlightbookRequest) returns (FlightbookResponse);
+}
+
+message FlightbookRequest {
+}
+
+message FlightbookResponse {
+ string t = 1;
+ string text1 = 2;
+ string text2 = 3;
+}

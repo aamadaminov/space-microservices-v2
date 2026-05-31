@@ -1,0 +1,10 @@
+networks:
+  monitoring:
+    driver: host
+services:
+  kafka-exporter:
+    image: danielqsj/kafka-exporter
+    command: ["--kafka.server=broker:29092"]
+    ports:
+      - 9308:9308
+    restart: unless-stopped

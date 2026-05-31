@@ -1,0 +1,293 @@
+receivers:
+  otlp/apps:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'gencoords'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['gencoords:2223']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: GENCOORDS
+        - job_name: 'gencoords-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['gencoords:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: GENCOORDS-NODE
+        - job_name: 'gentemps'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['gentemps:2223']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: GENTEMPS
+        - job_name: 'gentemps-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['gentemps:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: GENTEMPS-NODE
+        - job_name: 'genflightbook'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['genflightbook:2223']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: GENFLIGHTBOOK
+        - job_name: 'genflightbook-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['genflightbook:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: GENFLIGHTBOOK-NODE
+        - job_name: 'producercoords'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['producercoords:2223']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: PRODUCERCOORDS
+        - job_name: 'producercoords-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['producercoords:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: PRODUCERCOORDS-NODE
+        - job_name: 'producertemps'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['producertemps:2223']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: PRODUCERTEMPS
+        - job_name: 'producertemps-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['producertemps:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: PRODUCERTEMPS-NODE
+        - job_name: 'producerflightbook'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['producerflightbook:2223']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: PRODUCERFLIGHTBOOK
+        - job_name: 'producerflightbook-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['producerflightbook:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: PRODUCERFLIGHTBOOK-NODE
+        - job_name: 'consumersensors'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['consumersensors:2223']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: CONSUMERSENSORS
+        - job_name: 'consumersensors-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['consumersensors:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: CONSUMERSENSORS-NODE
+        - job_name: 'consumernotes'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['consumernotes:2223']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: CONSUMERNOTES
+        - job_name: 'consumernotes-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['consumernotes:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: CONSUMERNOTES-NODE
+
+        - job_name: 'kafka01'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['kafka01:9308']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: KAFKA01
+        - job_name: 'kafka01-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['kafka01:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: KAFKA01-NODE
+#        - job_name: 'clickhouse01'
+#          scrape_interval: 30s
+#          scheme: http
+#          metrics_path: metrics
+#          static_configs:
+#            - targets: ['clickhouse01:2223']
+#          metric_relabel_configs:
+#            - source_labels: [ __name__ ]
+#              target_label: CLICKHOUSE01
+        - job_name: 'clickhouse01-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['clickhouse01:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: CLICKHOUSE01-NODE
+        - job_name: 'rabbitmq01'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['rabbitmq01:15693']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: RABBITMQ01
+        - job_name: 'rabbitmq01-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['rabbitmq01:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: RABBITMQ01-NODE
+#        - job_name: 'postgresql01'
+#          scrape_interval: 30s
+#          scheme: http
+#          metrics_path: metrics
+#          static_configs:
+#            - targets: ['postgresql01:2223']
+#          metric_relabel_configs:
+#            - source_labels: [ __name__ ]
+#              target_label: POSTGRESQL01
+        - job_name: 'postgresql01-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['postgresql01:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: POSTGRESQL01-NODE
+        - job_name: 'elasticsearch01-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['elasticsearch01:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: ELASTICSEARCH01-NODE
+        - job_name: 'jaeger01-node'
+          scrape_interval: 30s
+          scheme: http
+          metrics_path: metrics
+          static_configs:
+            - targets: ['jaeger01:9100']
+          metric_relabel_configs:
+            - source_labels: [ __name__ ]
+              target_label: ELASTICSEARCH01-NODE
+processors:
+  batch:
+    # Batching improves compression and reduces network requests
+    send_batch_size: 1024
+    timeout: 10s
+  memory_limiter:
+    limit_mib: 512
+    check_interval: 10s
+
+
+exporters:
+  prometheus:
+    endpoint: 0.0.0.0:8889
+  otlp/jaeger:
+    endpoint: jaeger01:14317
+    tls:
+      insecure: true
+
+# extensions:
+#   health_check:
+#     endpoint: 0.0.0.0:13133
+#   pprof:
+#     endpoint: 0.0.0.0:1777
+#   zpages:
+#     endpoint: 0.0.0.0:55679
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp/apps]
+      exporters: [otlp/jaeger]
+    metrics:
+      receivers: [prometheus]
+      processors: [batch, memory_limiter]
+      exporters: [prometheus]
+  telemetry:
+    metrics:
+      readers:
+        - pull:
+            exporter:
+              prometheus:
+                host: '0.0.0.0'
+                port: 8888
+
+#     logs:
+#       receivers: [otlp]
+#       exporters: [otlp]
+

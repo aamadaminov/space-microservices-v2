@@ -1,0 +1,17 @@
+networks:
+  monitoring:
+    driver: host
+
+services:
+  consumersensors:
+    image: consumersensors:v5
+    container_name: consumersensors
+    environment:
+      ADDRESS_METRICS: 0.0.0.0:2223
+      ADDRESS_KAFKA: kafka01:9092
+      CLICKHOUSE_ADDRESS: clickhouse01:9000
+      OTEL_EXPORTER_OTLP_ENDPOINT: otel01:4317
+    ports:
+      - 50070:50070
+      - 2223:2223
+    restart: unless-stopped

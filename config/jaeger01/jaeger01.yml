@@ -1,0 +1,10 @@
+services:
+  jaeger01:
+    image: jaegertracing/jaeger:2.13.0
+    container_name: jaeger01
+    ports:
+      - "16686:16686"
+      - "14250:14250" # Jaeger gRPC collector port (used by OTel Collector)
+      - "14317:4317"
+      - "4318:4318"
+    restart: unless-stopped

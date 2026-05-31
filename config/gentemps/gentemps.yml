@@ -1,0 +1,17 @@
+networks:
+  monitoring:
+    driver: host
+
+services:
+  gentemps:
+    image: gentemps:v1
+    container_name: gentemps
+    environment:
+      ADDRESS_METRICS: 0.0.0.0:2223
+      ADDRESS_GRPC: 0.0.0.0:50070
+      OTEL_EXPORTER_OTLP_ENDPOINT: otel01:4317
+    ports:
+      - 50070:50070
+      - 2223:2223
+    restart: unless-stopped
+

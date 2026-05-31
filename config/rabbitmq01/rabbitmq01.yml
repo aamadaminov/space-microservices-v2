@@ -1,0 +1,37 @@
+version: "3.6"
+
+networks:
+  monitoring:
+#    driver: host
+    driver: bridge
+
+volumes:
+  rabbitmq-prometheus_prometheus:
+  rabbitmq-prometheus_grafana:
+
+services:
+  rmq0: &rabbitmq
+    image: rabbitmq:4.2.0-management
+    container_name: rabbitmq01
+#    networks:
+#      - "monitoring"
+    ports:
+      - "5672:5672"
+      - "15673:15672"
+      - "15693:15692"
+    restart: unless-stopped
+    cap_add:
+      - ALL
+    hostname: rabbitmq01
+    environment:
+      RABBITMQ_ERLANG_COOKIE: rabbitmq-prometheus
+      # Uncomment the following line if you want debug logs & colour
+      RABBITMQ_LOG: debug,+color
+#    volumes:
+#      - ./rabbitmq-overview.conf:/etc/rabbitmq/rabbitmq.conf:ro
+#      - ./rabbitmq-overview-definitions.json:/etc/rabbitmq/rabbitmq-definitions.json:ro
+    # we want to simulate hitting thresholds
+    ulimits:
+      nofile:
+        soft: 2000
+        hard: 2000

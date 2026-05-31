@@ -1,0 +1,18 @@
+networks:
+  monitoring:
+    driver: host
+
+services:
+  producertemps:
+    image: producertemps:v5
+    container_name: producertemps
+    environment:
+      ADDRESS_METRICS: 0.0.0.0:2223
+      ADDRESS_GRPC: gentemps:50070
+      ADDRESS_KAFKA: kafka01:9092
+      OTEL_EXPORTER_OTLP_ENDPOINT: otel01:4317
+    ports:
+      - 9070:9070 # API
+      - 2223:2223
+      - 9000:9000
+    restart: unless-stopped

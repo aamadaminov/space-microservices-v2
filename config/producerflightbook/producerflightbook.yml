@@ -1,0 +1,20 @@
+networks:
+  monitoring:
+    driver: host
+
+services:
+  gencoords:
+    image: producerflightbook:v1
+    container_name: producerflightbook
+    environment:
+      ADDRESS_METRICS: 0.0.0.0:2223
+#      ADDRESS_GRPC: genflightbook:50070
+      ADDRESS_GRPC: 172.17.0.1:50070
+#      ADDRESS_RABBITMQ: rabbitmq01:5672
+      ADDRESS_RABBITMQ: 172.17.0.1:5672
+
+
+      OTEL_EXPORTER_OTLP_ENDPOINT: otel01:4317
+    ports:
+      - 2223:2223
+    restart: unless-stopped

@@ -1,0 +1,39 @@
+filebeat.inputs:
+  - type: container
+    paths: [ "/var/lib/docker/containers/*/*.log" ]
+    processors:
+      - add_docker_metadata: ~
+#      - drop_event:
+#          when:
+#            not:
+#              or:
+#                - equals:
+#                    container.name: "app1"
+#                - equals:
+#                    container.name: "app2"
+#                - equals:
+#                    container.name: "app3"
+      - timestamp:
+          field: json.time
+          layouts:
+            - '2006-01-02T15:04:05.999999999Z07:00'
+            - '2006-01-02T15:04:05Z07:00'
+          timezone: UTC
+          ignore_failure: true
+
+      - decode_json_fields:
+          fields: [ "message" ]
+          target: ""
+          overwrite_keys: true
+          add_error_key: true
+
+
+setup.template.enabled: true
+setup.template.name: "jaeger01"
+setup.template.pattern: "jaeger01-*"
+setup.template.overwrite: true
+setup.ilm.enabled: false
+
+output.elasticsearch:
+  hosts: [ "http://elasticsearch01:9200" ]
+  index: "jaeger01-%{+yyyy.MM.dd}"

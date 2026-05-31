@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+
+  filebeat:
+    image: elastic/filebeat:7.17.26
+    container_name: filebeat
+    # Хостнеим попадёт в логи, можно кастомизировать
+    hostname: "consumernotes"
+    # Устанавливаем юзера root для доступа к логам и сокету
+    user: root
+    network_mode: host
+    restart: unless-stopped
+    # Добавляем логи с хоста для просмотра логов и docker-сокет для получения инфы о контейнерах.
+    volumes:
+      - ./data:/usr/share/filebeat/data
+      - ${PWD}/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+    command: ["--strict.perms=false", "-e", "-d", "publish"]

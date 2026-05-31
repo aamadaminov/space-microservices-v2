@@ -1,0 +1,19 @@
+syntax = "proto3";
+option go_package = "./coordsproto";
+package coordsproto;
+service SensorService {
+    rpc GetSensor(SensorRequest) returns (SensorResponse);
+}
+
+message SensorRequest {
+}
+
+message SensorResponse {
+ string time = 1;
+ double x1 = 2;
+ double y1 = 3;
+ double z1 = 4;
+ double vx1 = 5;
+ double vy1 = 6;
+ double vz1 = 7; 
+}

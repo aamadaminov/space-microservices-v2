@@ -1,0 +1,26 @@
+syntax = "proto3";
+package github.com.space_microservices_v2.gentemps.v1;
+option go_package = "github.com/aamadaminov/space-microservices-v2/gentemps/pkg/gen/gentemps/v1;gentempsv1";
+
+service SensorService {
+    rpc GetSensor(SensorRequest) returns (SensorResponse);
+}
+
+message SensorRequest {
+}
+
+message SensorResponse {
+ string time = 1;
+ double t1 = 2;
+ double h1 = 3;
+ double t2 = 4;
+ double h2 = 5;
+ double t3 = 6;
+ double h3 = 7;
+ double t4 = 8;
+ double h4 = 9;
+ double t5 = 10;
+ double h5 = 11;
+ double t6 = 12;
+ double h6 = 13; 
+}

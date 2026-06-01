@@ -10,7 +10,17 @@ replace (
 	github.com/aamadaminov/space-microservices-v2/gencoords/controller/grpc => ./gencoords/controller/grpc
 	github.com/aamadaminov/space-microservices-v2/gencoords/monitoring => ./gencoords/monitoring
 	github.com/aamadaminov/space-microservices-v2/gencoords/telemetry => ./gencoords/telemetry
+
+	github.com/aamadaminov/space-microservices-v2/gentemps/config => ./gentemps/config
+	github.com/aamadaminov/space-microservices-v2/gentemps/config/grpc => ./gentemps/config/grpc
+	github.com/aamadaminov/space-microservices-v2/gentemps/config/metrics => ./gentemps/config/metrics
+	github.com/aamadaminov/space-microservices-v2/gentemps/config/otel => ./gentemps/config/otel
+	github.com/aamadaminov/space-microservices-v2/gentemps/controller/grpc => ./gentemps/controller/grpc
+	github.com/aamadaminov/space-microservices-v2/gentemps/monitoring => ./gentemps/monitoring
+	github.com/aamadaminov/space-microservices-v2/gentemps/telemetry => ./gentemps/telemetry
 	github.com/aamadaminov/space-microservices-v2/pkg/gen/proto/gencoords/v1/gencoordsv1 => ./pkg/gen/proto/gencoords/v1
+	github.com/aamadaminov/space-microservices-v2/pkg/gen/proto/gentemps/v1/gentempsv1 => ./pkg/gen/proto/gentemps/v1
+
 	github.com/aamadaminov/space-microservices-v2/pkg/metrics => ./pkg/metrics
 	github.com/aamadaminov/space-microservices-v2/pkg/otel => ./pkg/otel
 )
@@ -20,13 +30,21 @@ require (
 	github.com/aamadaminov/space-microservices-v2/gencoords/controller/grpc v0.0.0-00010101000000-000000000000
 	github.com/aamadaminov/space-microservices-v2/gencoords/monitoring v0.0.0-00010101000000-000000000000
 	github.com/aamadaminov/space-microservices-v2/gencoords/telemetry v0.0.0-00010101000000-000000000000
+	github.com/aamadaminov/space-microservices-v2/gentemps/config v0.0.0-00010101000000-000000000000
+	github.com/aamadaminov/space-microservices-v2/gentemps/controller/grpc v0.0.0-00010101000000-000000000000
+	github.com/aamadaminov/space-microservices-v2/gentemps/monitoring v0.0.0-00010101000000-000000000000
+	github.com/aamadaminov/space-microservices-v2/gentemps/telemetry v0.0.0-00010101000000-000000000000
 )
 
 require (
 	github.com/aamadaminov/space-microservices-v2/gencoords/config/grpc v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aamadaminov/space-microservices-v2/gencoords/config/metrics v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aamadaminov/space-microservices-v2/gencoords/config/otel v0.0.0-00010101000000-000000000000 // indirect
+	github.com/aamadaminov/space-microservices-v2/gentemps/config/grpc v0.0.0-00010101000000-000000000000 // indirect
+	github.com/aamadaminov/space-microservices-v2/gentemps/config/metrics v0.0.0-00010101000000-000000000000 // indirect
+	github.com/aamadaminov/space-microservices-v2/gentemps/config/otel v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aamadaminov/space-microservices-v2/pkg/gen/proto/gencoords/v1/gencoordsv1 v0.0.0-00010101000000-000000000000 // indirect
+	github.com/aamadaminov/space-microservices-v2/pkg/gen/proto/gentemps/v1/gentempsv1 v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aamadaminov/space-microservices-v2/pkg/metrics v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aamadaminov/space-microservices-v2/pkg/otel v0.0.0-00010101000000-000000000000 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect

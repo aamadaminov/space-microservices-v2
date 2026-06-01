@@ -17,6 +17,6 @@ func getEnv(key, defaultValue string) string {
 func Load() (Config, error) {
     return Config{
         OtelExporterEndpoint:    getEnv("OTEL_ENDPOINT", "127.0.0.1:4317"),
-        OtelServiceName: "gencoords",
+        OtelServiceName: "gentemps",
     }, nil
 }

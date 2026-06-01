@@ -1,10 +1,9 @@
-package otel
+package metrics
 
 import "os"
 
 type Config struct {
-    OtelExporterEndpoint    string
-    OtelServiceName string
+    AddressMetrics    string
 }
 
 func getEnv(key, defaultValue string) string {
@@ -16,7 +15,6 @@ func getEnv(key, defaultValue string) string {
 
 func Load() (Config, error) {
     return Config{
-        OtelExporterEndpoint:    getEnv("OTEL_ENDPOINT", "127.0.0.1:4317"),
-        OtelServiceName: "gencoords",
+        AddressMetrics:    getEnv("ADDRESS_METRICS", ":2223"),
     }, nil
 }

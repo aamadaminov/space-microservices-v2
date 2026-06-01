@@ -3,11 +3,13 @@ package config
 import (
     "github.com/aamadaminov/space-microservices-v2/gencoords/config/metrics"
     "github.com/aamadaminov/space-microservices-v2/gencoords/config/otel"
+    "github.com/aamadaminov/space-microservices-v2/gencoords/config/grpc"
 )
 
 type Config struct {
     OTEL    otel.Config
     Metrics metrics.Config
+    GRPC    grpc.Config
 }
 
 func Init() (Config, error) {
@@ -21,6 +23,11 @@ func Init() (Config, error) {
     }
     
     cfg.Metrics, err = metrics.Load()
+    if err != nil {
+        return Config{}, err
+    }
+
+    cfg.GRPC, err = grpc.Load()
     if err != nil {
         return Config{}, err
     }

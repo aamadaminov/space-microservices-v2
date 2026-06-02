@@ -16,7 +16,6 @@ import (
 	"github.com/aamadaminov/space-microservices-v2/producercoords/config"
 	"github.com/aamadaminov/space-microservices-v2/producercoords/monitoring"
 	"github.com/aamadaminov/space-microservices-v2/producercoords/telemetry"
-
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -52,9 +51,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// if err := grpc.SetupGRPC(cfg.GRPC); err != nil {
-	// 	log.Fatal(err)
-	// }
+	fmt.Println("ADDRESS_GRPC=", cfg.GRPC.AddressGrpc)
+	conn, err := grpc.NewClient(cfg.GRPC.AddressGrpc, grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithStatsHandler(otelgrpc.NewClientHandler()))
+	if err != nil {
+		log.Fatalf("grpc.NewClient(%q): %v", cfg.GRPC.AddressGrpc, err)
+	}
+	defer conn.Close()
+	client := pb.NewSensorServiceClient(conn)
 
 	// fmt.Println("List of ENVs: OTEL_EXPORTER_OTLP_ENDPOINT (default 127.0.0.1:4317), ADDRESS_METRICS (default :2223), ADDRESS_GRPC (default :50070), ADDRESS_KAFKA (default :9092)")
 	// fmt.Println()
@@ -72,55 +75,10 @@ func main() {
 		}
 	}()
 
-	// // setting Otel Exporter Endpoint
-	// otelExporterEndpoint := os.Getenv("OTEL_EXPORTER_OTLP_ENDPOINT")
-	// if otelExporterEndpoint == "" {
-	// 	otelExporterEndpoint = "127.0.0.1:4317"
-	// }
-	// fmt.Println("OTEL_EXPORTER_OTLP_ENDPOINT=", otelExporterEndpoint)
-
-	// // setting Otel Service Name Endpoint
-	// otelServiceName := "ProducerCoords"
-
-	// // init Otel
-	// _, err := otel.SetupOpenTelemetry(context.Background(), otelExporterEndpoint, otelServiceName)
-	// if err != nil {
-	// 	log.Fatalf("failed to initialize OpenTelemetry: %v", err)
-	// 	return
-	// }
-
-	// // run Exporter for Prometheus
-	// metrics.SetupPrometheusExporter()
-	// addressMetrics := os.Getenv("ADDRESS_METRICS")
-	// if addressMetrics == "" {
-	// 	addressMetrics = ":2224"
-	// }
-	// fmt.Println("ADDRESS_METRICS=", addressMetrics)
-	// go metrics.ServeMetrics(addressMetrics)
-
-	// start gRPC Client
-	addressGrpc := os.Getenv("ADDRESS_GRPC")
-	if addressGrpc == "" {
-		addressGrpc = "127.0.0.1:50070"
-	}
-	fmt.Println("ADDRESS_GRPC=", addressGrpc)
-
-	conn, err := grpc.NewClient(addressGrpc, grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithStatsHandler(otelgrpc.NewClientHandler()))
-	if err != nil {
-		log.Fatalf("grpc.NewClient(%q): %v", addressGrpc, err)
-	}
-	defer conn.Close()
-	client := pb.NewSensorServiceClient(conn)
-
-	// start Kafka Client
-	addressKafka := os.Getenv("ADDRESS_KAFKA")
-	if addressKafka == "" {
-		addressKafka = "172.17.0.1:9092"
-	}
-	fmt.Println("ADDRESS_KAFKA=", addressKafka)
+	fmt.Println("ADDRESS_KAFKA=", cfg.Kafka.AddressKafka)
 
 	// init Kafka producer + Otel
-	brokers := []string{addressKafka}
+	brokers := []string{cfg.Kafka.AddressKafka}
 	pNewKafkaProducer, err := kafka.NewKafkaProducer(brokers)
 	if err != nil {
 		fmt.Printf("Failed to create producer: %s\n", err)

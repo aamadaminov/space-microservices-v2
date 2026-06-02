@@ -1,15 +1,17 @@
 package config
 
 import (
+	"github.com/aamadaminov/space-microservices-v2/producercoords/config/grpc"
+	"github.com/aamadaminov/space-microservices-v2/producercoords/config/kafka"
 	"github.com/aamadaminov/space-microservices-v2/producercoords/config/metrics"
 	"github.com/aamadaminov/space-microservices-v2/producercoords/config/otel"
-	// "github.com/aamadaminov/space-microservices-v2/producercoords/config/grpc"
 )
 
 type Config struct {
 	OTEL    otel.Config
 	Metrics metrics.Config
-	// GRPC    grpc.Config
+	GRPC    grpc.Config
+	Kafka   kafka.Config
 }
 
 func Init() (Config, error) {
@@ -27,10 +29,15 @@ func Init() (Config, error) {
 		return Config{}, err
 	}
 
-	// cfg.GRPC, err = grpc.Load()
-	// if err != nil {
-	//     return Config{}, err
-	// }
+	cfg.GRPC, err = grpc.Load()
+	if err != nil {
+		return Config{}, err
+	}
+
+	cfg.Kafka, err = kafka.Load()
+	if err != nil {
+		return Config{}, err
+	}
 
 	return cfg, nil
 }

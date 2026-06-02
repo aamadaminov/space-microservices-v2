@@ -30,10 +30,10 @@ replace (
 	github.com/aamadaminov/space-microservices-v2/producercoords/adapter/kafka => ./producercoords/adapter/kafka
 
 	github.com/aamadaminov/space-microservices-v2/producercoords/config => ./producercoords/config
-	//	github.com/aamadaminov/space-microservices-v2/producercoords/config/grpc => ./producercoords/config/grpc
+	github.com/aamadaminov/space-microservices-v2/producercoords/config/grpc => ./producercoords/config/grpc
+	github.com/aamadaminov/space-microservices-v2/producercoords/config/kafka => ./producercoords/config/kafka
 	github.com/aamadaminov/space-microservices-v2/producercoords/config/metrics => ./producercoords/config/metrics
 	github.com/aamadaminov/space-microservices-v2/producercoords/config/otel => ./producercoords/config/otel
-	//	github.com/aamadaminov/space-microservices-v2/producercoords/controller/grpc => ./producercoords/controller/grpc
 	github.com/aamadaminov/space-microservices-v2/producercoords/monitoring => ./producercoords/monitoring
 	github.com/aamadaminov/space-microservices-v2/producercoords/telemetry => ./producercoords/telemetry
 
@@ -78,6 +78,8 @@ require (
 	github.com/aamadaminov/space-microservices-v2/pkg/gen/proto/gentemps/v1/gentempsv1 v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aamadaminov/space-microservices-v2/pkg/metrics v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aamadaminov/space-microservices-v2/pkg/otel v0.0.0-00010101000000-000000000000 // indirect
+	github.com/aamadaminov/space-microservices-v2/producercoords/config/grpc v0.0.0-00010101000000-000000000000 // indirect
+	github.com/aamadaminov/space-microservices-v2/producercoords/config/kafka v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aamadaminov/space-microservices-v2/producercoords/config/metrics v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aamadaminov/space-microservices-v2/producercoords/config/otel v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aamadaminov/space-microservices-v2/s3consumer/config/minio v0.0.0-00010101000000-000000000000 // indirect

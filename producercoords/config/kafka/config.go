@@ -1,10 +1,9 @@
-package otel
+package kafka
 
 import "os"
 
 type Config struct {
-	OtelExporterEndpoint string
-	OtelServiceName      string
+	AddressKafka string
 }
 
 func getEnv(key, defaultValue string) string {
@@ -16,7 +15,6 @@ func getEnv(key, defaultValue string) string {
 
 func Load() (Config, error) {
 	return Config{
-		OtelExporterEndpoint: getEnv("OTEL_ENDPOINT", "127.0.0.1:4317"),
-		OtelServiceName:      "producercoords",
+		AddressKafka: getEnv("ADDRESS_KAFKA", "172.17.0.1:9092"),
 	}, nil
 }

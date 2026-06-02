@@ -9,6 +9,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/aamadaminov/space-microservices-v2/s3consumer/config"
+
 	minio "github.com/minio/minio-go/v7"
 )
 
@@ -32,14 +34,10 @@ func CreateBuckets(s3Client *minio.Client) {
 	}
 }
 
-func SaveImageToS3(s3Client *minio.Client, cameraNum int) {
+func SaveImageToS3(cfg config.Config, s3Client *minio.Client, cameraNum int) {
 
-	imgPath := os.Getenv("IMG_PATH")
-	if imgPath == "" {
-		imgPath = "./images/"
-	}
-
-	dirPath := fmt.Sprintf("%sc%d/", imgPath, cameraNum)
+	dirPath := fmt.Sprintf("%s/c%d/", cfg.Paths.ImgPath, cameraNum)
+	fmt.Println(dirPath)
 
 	// read files in directory
 	entries, err := os.ReadDir(dirPath)
@@ -49,7 +47,7 @@ func SaveImageToS3(s3Client *minio.Client, cameraNum int) {
 	}
 
 	for _, entry := range entries {
-		filePath := fmt.Sprintf("%sc%d/%s", imgPath, cameraNum, entry.Name())
+		filePath := fmt.Sprintf("%s/c%d/%s", cfg.Paths.ImgPath, cameraNum, entry.Name())
 		if !strings.Contains(entry.Name(), ".lock") {
 			object, err := os.Open(filePath)
 			if err != nil {

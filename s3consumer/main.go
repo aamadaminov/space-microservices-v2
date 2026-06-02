@@ -3,30 +3,23 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
 	"sync"
 
 	"github.com/aamadaminov/space-microservices-v2/s3consumer/adapter/s3"
+	"github.com/aamadaminov/space-microservices-v2/s3consumer/config"
 	minio "github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 )
 
 func main() {
 
-	minioAddr := os.Getenv("MINIO_ENDPOINT")
-	if minioAddr == "" {
-		minioAddr = "localhost:9050"
+	cfg, err := config.Init()
+	if err != nil {
+		log.Fatal(err)
 	}
-	minioUser := os.Getenv("MINIO_USER")
-	if minioUser == "" {
-		minioUser = "minioadmin"
-	}
-	minioPassword := os.Getenv("MINIO_PASSWORD")
-	if minioPassword == "" {
-		minioPassword = "minioadmin"
-	}
-	s3Client, err := minio.New(minioAddr, &minio.Options{
-		Creds:  credentials.NewStaticV4(minioUser, minioPassword, ""),
+
+	s3Client, err := minio.New(cfg.Minio.MinioAddr, &minio.Options{
+		Creds:  credentials.NewStaticV4(cfg.Minio.MinioUser, cfg.Minio.MinioPassword, ""),
 		Secure: false,
 	})
 	if err != nil {
@@ -42,7 +35,7 @@ func main() {
 		go func(id int) {
 			defer wg.Done()
 			for {
-				s3.SaveImageToS3(s3Client, cameraNum)
+				s3.SaveImageToS3(cfg, s3Client, cameraNum)
 			}
 
 		}(cameraNum)

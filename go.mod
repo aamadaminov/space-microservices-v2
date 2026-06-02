@@ -28,6 +28,10 @@ replace (
 	github.com/aamadaminov/space-microservices-v2/pkg/otel => ./pkg/otel
 
 	github.com/aamadaminov/space-microservices-v2/s3consumer/adapter/s3 => ./s3consumer/adapter/s3
+
+	github.com/aamadaminov/space-microservices-v2/s3consumer/config => ./s3consumer/config
+	github.com/aamadaminov/space-microservices-v2/s3consumer/config/minio => ./s3consumer/config/minio
+	github.com/aamadaminov/space-microservices-v2/s3consumer/config/paths => ./s3consumer/config/paths
 )
 
 require (
@@ -42,6 +46,7 @@ require (
 	github.com/aamadaminov/space-microservices-v2/gentemps/monitoring v0.0.0-00010101000000-000000000000
 	github.com/aamadaminov/space-microservices-v2/gentemps/telemetry v0.0.0-00010101000000-000000000000
 	github.com/aamadaminov/space-microservices-v2/s3consumer/adapter/s3 v0.0.0-00010101000000-000000000000
+	github.com/aamadaminov/space-microservices-v2/s3consumer/config v0.0.0-00010101000000-000000000000
 	github.com/minio/minio-go/v7 v7.2.0
 )
 
@@ -56,6 +61,8 @@ require (
 	github.com/aamadaminov/space-microservices-v2/pkg/gen/proto/gentemps/v1/gentempsv1 v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aamadaminov/space-microservices-v2/pkg/metrics v0.0.0-00010101000000-000000000000 // indirect
 	github.com/aamadaminov/space-microservices-v2/pkg/otel v0.0.0-00010101000000-000000000000 // indirect
+	github.com/aamadaminov/space-microservices-v2/s3consumer/config/minio v0.0.0-00010101000000-000000000000 // indirect
+	github.com/aamadaminov/space-microservices-v2/s3consumer/config/paths v0.0.0-00010101000000-000000000000 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect

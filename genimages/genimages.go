@@ -2,30 +2,33 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math/rand/v2"
 	"os"
 	"path/filepath"
 	"sync"
 	"time"
-	"log"
+
 	"github.com/aamadaminov/space-microservices-v2/genimages/config"
-	"github.com/aamadaminov/space-microservices-v2/genimages/config/paths"	
+	"github.com/aamadaminov/space-microservices-v2/genimages/config/paths"
 )
 
 func mkDirs(cfg paths.Config) error {
+
+	os.Mkdir(fmt.Sprintf("%s", cfg.ImgPath), 0777)
 	for cameraNum := 0; cameraNum < 10; cameraNum++ {
-		os.Mkdir(fmt.Sprintf("%sc%d", cfg.ImgPath, cameraNum), 0777)
+		os.Mkdir(fmt.Sprintf("%s/c%d", cfg.ImgPath, cameraNum), 0777)
 	}
 	return nil
 }
 
 func randomImageAdd(cfg paths.Config, cameraNum int, pauseTime time.Duration) error {
-	dirPathForSave := fmt.Sprintf("%sc%d/", cfg.ImgPath, cameraNum)
+	dirPathForSave := fmt.Sprintf("%s/c%d/", cfg.ImgPath, cameraNum)
 	for {
 		fileCnt := 0
 		for fileCnt = 0; fileCnt < 50; fileCnt++ {
 			n := rand.IntN(10)
-			imageSource, err := os.ReadFile(fmt.Sprintf("%s%d.jpg", cfg.DirPathSource, n))
+			imageSource, err := os.ReadFile(fmt.Sprintf("%s/%d.jpg", cfg.DirPathSource, n))
 			if err != nil {
 				fmt.Println("Error file reading:", err)
 				return err
@@ -38,19 +41,18 @@ func randomImageAdd(cfg paths.Config, cameraNum int, pauseTime time.Duration) er
 			time.Sleep(pauseTime * time.Millisecond)
 		}
 	}
-	return nil
 }
 
 func main() {
 
 	cfg, err := config.Init()
-    if err != nil {
-        log.Fatal(err)
-    }
+	if err != nil {
+		log.Fatal(err)
+	}
 	mkDirs(cfg.Paths)
 
 	wg := &sync.WaitGroup{}
-	var pauseTime time.Duration = 5000 
+	var pauseTime time.Duration = 5000
 
 	for cameraNum := 0; cameraNum < 10; cameraNum++ {
 		wg.Add(1)
